@@ -24,18 +24,18 @@ def can_attack_test(position, queens):
             return True
     return False
 
-# def print_board(board, n):
+def print_board(board, n):
 
-    # def _empty_if_none(value):
-        # if value is None:
-            # return ' '
-        # return value
+    def _empty_if_none(value):
+        if value is None:
+            return ' '
+        return value
 
-    # print ''.join([
-        # '|  %s  %s' % (_empty_if_none(board["%dx%d" % (x, y)]), '|\n' if y % n == n - 1 else '')
-            # for x in range(n)
-            # for y in range(n)
-    # ])
+    print ''.join([
+        '|  %s  %s' % (_empty_if_none(board["%dx%d" % (x, y)]), '|\n' if y % n == n - 1 else '')
+            for x in range(n)
+            for y in range(n)
+    ])
 
 
 def nqueens(n):
@@ -74,10 +74,12 @@ def nqueens(n):
                 board[position] = 'Q'
                 queens.append(position)
         if len(queens) == n:
-            results.append(queens)
+            results.append((board, queens))
 
     if results:
-        print "{} results found: \n{}".format(len(results), results)
+        print "{} results found: \n{}".format(len(results), [x[1] for x in results])
+        for result in results:
+            print_board(result[0], n)
     else:
         print "No results found"
 
